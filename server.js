@@ -7,7 +7,7 @@
  */
 
 // ============================================
-// IMPORTS FIRST (ES Modules hoists these anyway)
+// ALL IMPORTS AT TOP (ES Modules requirement)
 // ============================================
 import dotenv from "dotenv";
 import path from "path";
@@ -17,6 +17,12 @@ import mongoose from "mongoose";
 import fs from "fs";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import hpp from "hpp";
+import { createServer } from "http";
+import crypto from "crypto";
 
 // ============================================
 // DEBUG LOGGING - Runs after imports
@@ -53,12 +59,6 @@ if (process.env.NODE_ENV !== "production") {
 } else {
   console.log("☁️ Production mode: Using Hostinger hPanel environment variables");
 }
-import cookieParser from "cookie-parser";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import hpp from "hpp";
-import { createServer } from "http";
-import crypto from "crypto";
 
 // ============================================
 // APP SETUP
