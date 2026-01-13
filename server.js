@@ -43,23 +43,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ============================================
-// HOSTINGER CLOUD FIX: Only load .env in non-production
+// HOSTINGER FIX: Load .env file (per Hostinger Support)
+// The .env file is placed in public_html and protected via .htaccess
 // ============================================
-if (process.env.NODE_ENV !== "production") {
-  const envCurrent = path.resolve(__dirname, '.env');
-  const envParent = path.resolve(__dirname, '../.env');
+const envPath = path.resolve(__dirname, '.env');
+console.log("Loading .env from:", envPath);
+dotenv.config({ path: envPath });
 
-  dotenv.config({ path: envCurrent });
-
-  if (!process.env.MONGO_URI) {
-    console.log(`⚠️ .env not found in current dir. Trying parent: ${envParent}`);
-    dotenv.config({ path: envParent });
-  }
-
-  console.log("📄 Development mode: Loaded .env file");
-} else {
-  console.log("☁️ Production mode: Using Hostinger hPanel environment variables");
-}
+// Log after loading
+console.log("After dotenv.config():");
+console.log("DEBUG MONGO_URI:", process.env.MONGO_URI ? "LOADED" : "MISSING");
+console.log("DEBUG JWT_SECRET:", process.env.JWT_SECRET ? "LOADED" : "MISSING");
 
 // ============================================
 // APP SETUP
