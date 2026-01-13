@@ -308,7 +308,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subcategoryRoutes);
 app.use("/api/properties", propertyRoutes);
 app.use("/api/leads", leadRoutes);
-// app.use("/api/chat", chatRoutes); // Disabled until Socket.io is back
+app.use("/api/chat", chatRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/agreements", agreementRoutes);
 app.use("/api/saved-searches", savedSearchRoutes);
